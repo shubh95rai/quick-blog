@@ -94,7 +94,7 @@ export default function AddBlog() {
     >
       <div className="bg-white w-full max-w-3xl p-4 md:p-10 sm:m-10 shadow rounded">
         <p>Upload Thumbnail</p>
-        <label htmlFor="image">
+        <label htmlFor="image" className="inline-block">
           <img
             src={!image ? assets.upload_area : URL.createObjectURL(image)}
             alt=""
@@ -104,7 +104,7 @@ export default function AddBlog() {
             type="file"
             id="image"
             hidden
-            required
+            // required
             onChange={(e) => setImage(e.target.files[0])}
           />
         </label>
