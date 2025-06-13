@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import Comment from "../models/Comment.js";
-import Blog from "../models/blog.js";
+import Blog from "../models/Blog.js";
 
 export async function adminLogin(req, res) {
   try {
