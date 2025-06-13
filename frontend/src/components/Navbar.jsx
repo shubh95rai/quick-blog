@@ -16,12 +16,12 @@ export default function Navbar() {
         }}
       />
       <button
-        className="flex items-center  gap-2 rounded-full text-sm cursor-pointer bg-primary text-white px-10 py-2.5"
+        className="flex items-center  gap-2 rounded-full text-sm cursor-pointer bg-primary text-white px-5 py-2.5"
         onClick={() => {
           navigate("/admin");
         }}
       >
-        {token ? "Dashboard" : "Login"}
+        {token ? "Dashboard" : "Admin Login"}
         <img src={assets.arrow} alt="arrow" className="w-3 mt-0.5" />
       </button>
     </div>
