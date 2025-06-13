@@ -1,4 +1,4 @@
-import Blog from "../models/blog.js";
+import Blog from "../models/Blog.js";
 import fs from "fs";
 import imagekit from "../configs/imagekit.js";
 import Comment from "../models/Comment.js";
