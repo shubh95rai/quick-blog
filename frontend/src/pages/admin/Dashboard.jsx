@@ -16,8 +16,9 @@ export default function Dashboard() {
     recentBlogs: [],
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   async function fetchDashboard() {
-    setLoading(true);
     try {
       const { data } = await axios.get("/api/admin/dashboard");
 
@@ -26,13 +27,16 @@ export default function Dashboard() {
       }
     } catch (error) {
       toast.error(error.response.data.message);
-    } finally {
-      setLoading(false);
     }
   }
 
   useEffect(() => {
-    fetchDashboard();
+    async function fetchData() {
+      setLoading(true);
+      await fetchDashboard();
+      setLoading(false);
+    }
+    fetchData();
   }, []);
 
   return !loading ? (
@@ -73,6 +77,9 @@ export default function Dashboard() {
         <div className="flex items-center gap-3 m-4 mt-6 text-gray-600">
           <img src={assets.dashboard_icon_4} alt="" />
           <p>Latest Blogs</p>
+          {isSubmitting && (
+            <div className="size-4 animate-spin rounded-full border-2 border-t-transparent border-gray-700"></div>
+          )}
         </div>
 
         <div className="relative max-w-4xl overflow-x-auto shadow rounded-lg scrollbar-hide bg-white">
@@ -108,6 +115,7 @@ export default function Dashboard() {
                   blog={blog}
                   fetchBlogs={fetchDashboard}
                   index={index + 1}
+                  setIsSubmitting={setIsSubmitting}
                 />
               ))}
             </tbody>
