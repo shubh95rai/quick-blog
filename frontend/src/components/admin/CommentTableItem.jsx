@@ -2,7 +2,11 @@ import toast from "react-hot-toast";
 import { assets } from "../../assets/assets";
 import { useAppContext } from "../../context/AppContext";
 
-export default function CommentTableItem({ comment, fetchComments }) {
+export default function CommentTableItem({
+  comment,
+  fetchComments,
+  setIsSubmitting,
+}) {
   const { axios } = useAppContext();
 
   const { blog, createdAt, _id } = comment;
@@ -10,17 +14,20 @@ export default function CommentTableItem({ comment, fetchComments }) {
   const BlogDate = new Date(createdAt).toLocaleDateString();
 
   async function approveComment() {
+    setIsSubmitting(true);
     try {
       const { data } = await axios.post("/api/admin/approve-comment", {
         id: _id,
       });
 
       if (data.success) {
+        await fetchComments();
         toast.success(data.message);
-        fetchComments();
       }
     } catch (error) {
       toast.error(error.response.data.message);
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -31,17 +38,20 @@ export default function CommentTableItem({ comment, fetchComments }) {
 
     if (!confirm) return;
 
+    setIsSubmitting(true);
     try {
       const { data } = await axios.post("/api/admin/delete-comment", {
         id: _id,
       });
 
       if (data.success) {
+        await fetchComments();
         toast.success(data.message);
-        fetchComments();
       }
     } catch (error) {
       toast.error(error.response.data.message);
+    } finally {
+      setIsSubmitting(false);
     }
   }
 

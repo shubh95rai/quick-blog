@@ -3,9 +3,11 @@ import { assets, dashboard_data } from "../../assets/assets";
 import BlogTableItem from "../../components/admin/BlogTableItem";
 import toast from "react-hot-toast";
 import { useAppContext } from "../../context/AppContext";
+import Loader from "../../components/Loader";
+import { LoaderCircle } from "lucide-react";
 
 export default function Dashboard() {
-  const { axios } = useAppContext();
+  const { axios, loading, setLoading } = useAppContext();
 
   const [dashboardData, setDashboardData] = useState({
     blogs: 0,
@@ -15,6 +17,7 @@ export default function Dashboard() {
   });
 
   async function fetchDashboard() {
+    setLoading(true);
     try {
       const { data } = await axios.get("/api/admin/dashboard");
 
@@ -23,14 +26,16 @@ export default function Dashboard() {
       }
     } catch (error) {
       toast.error(error.response.data.message);
+    } finally {
+      setLoading(false);
     }
   }
-  
+
   useEffect(() => {
     fetchDashboard();
   }, []);
 
-  return (
+  return !loading ? (
     <div className="flex-1 p-4 md:p-10 bg-blue-50/50">
       {/* Dashboard Header */}
       <div className="flex flex-wrap gap-4">
@@ -109,6 +114,10 @@ export default function Dashboard() {
           </table>
         </div>
       </div>
+    </div>
+  ) : (
+    <div className="flex-1 flex items-center justify-center bg-blue-50/50">
+      <div className="size-10 animate-spin rounded-full border-3 border-t-blue-50/50 border-gray-700"></div>
     </div>
   );
 }

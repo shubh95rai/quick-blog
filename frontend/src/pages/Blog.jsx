@@ -17,6 +17,7 @@ export default function Blog() {
   const [comments, setComments] = useState([]);
   const [name, setName] = useState("");
   const [content, setContent] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function fetchBlogData() {
     try {
@@ -47,6 +48,7 @@ export default function Blog() {
   async function addComment(e) {
     e.preventDefault();
 
+    setIsSubmitting(true);
     try {
       const { data } = await axios.post("/api/blog/add-comment", {
         blog: id,
@@ -61,6 +63,8 @@ export default function Blog() {
       }
     } catch (error) {
       toast.error(error.response.data.message);
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -153,9 +157,10 @@ export default function Blog() {
 
             <button
               type="submit"
-              className="bg-primary text-white rounded p-2 px-8 hover:scale-102 transition-all cursor-pointer"
+              className="bg-primary text-white rounded p-2 px-8 hover:scale-102 transition-all cursor-pointer w-36 flex justify-center"
+              disabled={isSubmitting}
             >
-              Submit
+              {isSubmitting ? "Submitting..." : "Submit"}
             </button>
           </form>
         </div>

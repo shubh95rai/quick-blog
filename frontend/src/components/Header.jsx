@@ -68,7 +68,7 @@ export default function Header() {
       <img
         src={assets.gradientBackground}
         alt=""
-        className="absolute -top-20 -z-1 opacity-50 w-full h-[600px]"
+        className="absolute -top-60 -z-1 opacity-50 w-full h-[600px]"
       />
     </div>
   );

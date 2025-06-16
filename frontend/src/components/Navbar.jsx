@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
+import { ArrowRight } from "lucide-react";
 
 export default function Navbar() {
   const { token, navigate } = useAppContext();
@@ -22,7 +23,9 @@ export default function Navbar() {
         }}
       >
         {token ? "Dashboard" : "Admin Login"}
-        <img src={assets.arrow} alt="arrow" className="w-3 mt-0.5" />
+        {/* <img src={assets.arrow} alt="arrow" className="w-3 mt-0.5" /> */}
+
+        <ArrowRight className="w-4 pt-[1px]" />
       </button>
     </div>
   );

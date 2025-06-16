@@ -2,7 +2,12 @@ import toast from "react-hot-toast";
 import { assets } from "../../assets/assets";
 import { useAppContext } from "../../context/AppContext";
 
-export default function BlogTableItem({ blog, fetchBlogs, index }) {
+export default function BlogTableItem({
+  blog,
+  fetchBlogs,
+  index,
+  setIsSubmitting,
+}) {
   const { axios } = useAppContext();
 
   const { title, createdAt } = blog;
@@ -16,32 +21,38 @@ export default function BlogTableItem({ blog, fetchBlogs, index }) {
 
     if (!confirm) return;
 
+    setIsSubmitting(true);
     try {
       const { data } = await axios.post("/api/blog/delete", {
         id: blog._id,
       });
 
       if (data.success) {
-        toast.success(data.message);
         await fetchBlogs();
+        toast.success(data.message);
       }
     } catch (error) {
       toast.error(error.response.data.message);
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
   async function togglePublish() {
+    setIsSubmitting(true);
     try {
       const { data } = await axios.post("/api/blog/toggle-publish", {
         id: blog._id,
       });
 
       if (data.success) {
-        toast.success(data.message);
         await fetchBlogs();
+        toast.success(data.message);
       }
     } catch (error) {
       toast.error(error.response.data.message);
+    } finally {
+      setIsSubmitting(false);
     }
   }
 

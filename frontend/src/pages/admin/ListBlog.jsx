@@ -5,9 +5,11 @@ import { useAppContext } from "../../context/AppContext";
 import toast from "react-hot-toast";
 
 export default function ListBlog() {
-  const { axios } = useAppContext();
+  const { axios, loading, setLoading } = useAppContext();
 
   const [blogs, setBlogs] = useState([]);
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function fetchBlogs() {
     try {
@@ -22,12 +24,22 @@ export default function ListBlog() {
   }
 
   useEffect(() => {
-    fetchBlogs();
+    async function fetchData() {
+      setLoading(true);
+      await fetchBlogs();
+      setLoading(false);
+    }
+    fetchData();
   }, []);
 
-  return (
+  return !loading ? (
     <div className="flex-1 pt-5 px-5 sm:pt-12 sm:pl-16 bg-blue-50/50">
-      <h1>All Blogs</h1>
+      <div className="flex items-center gap-4">
+        <h1>All Blogs</h1>
+        {isSubmitting && (
+          <div className="size-4 animate-spin rounded-full border-2 border-t-transparent border-gray-700"></div>
+        )}
+      </div>
 
       <div className="relative h-4/5 mt-4 max-w-4xl overflow-x-auto shadow rounded-lg scrollbar-hide bg-white">
         <table className="w-full text-sm text-gray-500">
@@ -62,11 +74,16 @@ export default function ListBlog() {
                 blog={blog}
                 fetchBlogs={fetchBlogs}
                 index={index + 1}
+                setIsSubmitting={setIsSubmitting}
               />
             ))}
           </tbody>
         </table>
       </div>
+    </div>
+  ) : (
+    <div className="flex-1 flex items-center justify-center bg-blue-50/50">
+      <div className="size-10 animate-spin rounded-full border-3 border-t-blue-50/50 border-gray-700"></div>
     </div>
   );
 }
