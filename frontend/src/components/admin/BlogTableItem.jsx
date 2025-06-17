@@ -6,6 +6,7 @@ export default function BlogTableItem({
   blog,
   fetchBlogs,
   index,
+  isSubmitting,
   setIsSubmitting,
 }) {
   const { axios } = useAppContext();
@@ -74,15 +75,22 @@ export default function BlogTableItem({
         <button
           className="border px-2 py-0.5 mt-1 rounded cursor-pointer"
           onClick={togglePublish}
+          disabled={isSubmitting}
         >
           {blog.isPublished ? "Unpublish" : "Publish"}
         </button>
-        <img
-          src={assets.cross_icon}
-          alt=""
-          className="w-8 hover:scale-110 transition-all cursor-pointer"
+
+        <button
           onClick={deleteBlog}
-        />
+          disabled={isSubmitting}
+          className="shrink-0 pr-4"
+        >
+          <img
+            src={assets.cross_icon}
+            alt=""
+            className="w-8 hover:scale-110 transition-all cursor-pointer"
+          />
+        </button>
       </td>
     </tr>
   );

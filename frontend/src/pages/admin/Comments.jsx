@@ -62,39 +62,54 @@ export default function Comments() {
       </div>
 
       <div className="relative h-4/5 max-w-3xl overflow-x-auto mt-4 bg-white shadow rounded-lg scrollbar-hide">
-        <table className="w-full text-sm text-gray-500">
-          <thead className="text-xs text-gray-700 text-left uppercase">
-            <tr>
-              <th scope="col" className="px-6 py-3">
-                Blog Title & Comment
-              </th>
-              <th scope="col" className="px-6 py-3 max-sm:hidden">
-                Date
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {comments
-              .filter((comment) => {
-                if (filter === "Approved") {
-                  return comment.isApproved === true;
-                }
+        {filter !== "Approved" &&
+        comments.filter((comment) => comment.isApproved === false).length ===
+          0 ? (
+          <div className="flex h-full items-center justify-center">
+            <p className="text-gray-500">There are no comments to approve</p>
+          </div>
+        ) : filter === "Approved" &&
+          comments.filter((comment) => comment.isApproved === true).length ===
+            0 ? (
+          <div className="flex h-full items-center justify-center">
+            <p className="text-gray-500">There are no approved comments</p>
+          </div>
+        ) : (
+          <table className="w-full text-sm text-gray-500">
+            <thead className="text-xs text-gray-700 text-left uppercase">
+              <tr>
+                <th scope="col" className="px-6 py-3">
+                  Blog Title & Comment
+                </th>
+                <th scope="col" className="px-6 py-3 max-sm:hidden">
+                  Date
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {comments
+                .filter((comment) => {
+                  if (filter === "Approved") {
+                    return comment.isApproved === true;
+                  }
 
-                return comment.isApproved === false;
-              })
-              .map((comment, index) => (
-                <CommentTableItem
-                  key={index}
-                  comment={comment}
-                  fetchComments={fetchComments}
-                  setIsSubmitting={setIsSubmitting}
-                />
-              ))}
-          </tbody>
-        </table>
+                  return comment.isApproved === false;
+                })
+                .map((comment, index) => (
+                  <CommentTableItem
+                    key={index}
+                    comment={comment}
+                    fetchComments={fetchComments}
+                    isSubmitting={isSubmitting}
+                    setIsSubmitting={setIsSubmitting}
+                  />
+                ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   ) : (

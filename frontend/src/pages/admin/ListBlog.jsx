@@ -74,6 +74,7 @@ export default function ListBlog() {
                 blog={blog}
                 fetchBlogs={fetchBlogs}
                 index={index + 1}
+                isSubmitting={isSubmitting}
                 setIsSubmitting={setIsSubmitting}
               />
             ))}

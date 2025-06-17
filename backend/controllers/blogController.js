@@ -196,7 +196,7 @@ export async function generateContent(req, res) {
     const { prompt } = req.body;
 
     const content = await main(
-      `${prompt} - Generate a blog content for this topic in simple text format`
+      `Write a complete, well-structured blog post (not an outline) titled ${prompt}. Fill out each section fully, with tips and examples. Avoid leaving bullet points empty. Don't leave any bullet points or sections blank. Avoid using placeholders.`
     );
 
     res.status(200).json({ success: true, content });

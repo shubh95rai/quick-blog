@@ -5,6 +5,7 @@ import { useAppContext } from "../../context/AppContext";
 export default function CommentTableItem({
   comment,
   fetchComments,
+  isSubmitting,
   setIsSubmitting,
 }) {
   const { axios } = useAppContext();
@@ -69,21 +70,27 @@ export default function CommentTableItem({
       <td className="px-6 py-4">
         <div className="inline-flex items-center gap-4">
           {!comment.isApproved ? (
-            <img
-              src={assets.tick_icon}
-              className="w-5 hover:scale-110 transition-all cursor-pointer"
-              onClick={approveComment}
-            />
+            <button onClick={approveComment} disabled={isSubmitting}>
+              <img
+                src={assets.tick_icon}
+                className="w-5 hover:scale-110 transition-all cursor-pointer"
+              />
+            </button>
           ) : (
             <p className="text-xs border border-green-600 text-green-600 bg-green-100 rounded-full px-3 py-1">
               Approved
             </p>
           )}
-          <img
-            src={assets.bin_icon}
-            className="w-5 hover:scale-110 transition-all cursor-pointer"
+          <button
             onClick={deleteComment}
-          />
+            disabled={isSubmitting}
+            className="shrink-0"
+          >
+            <img
+              src={assets.bin_icon}
+              className="w-5 hover:scale-110 transition-all cursor-pointer"
+            />
+          </button>
         </div>
       </td>
     </tr>

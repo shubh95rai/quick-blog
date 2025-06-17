@@ -115,6 +115,7 @@ export default function Dashboard() {
                   blog={blog}
                   fetchBlogs={fetchDashboard}
                   index={index + 1}
+                  isSubmitting={isSubmitting}
                   setIsSubmitting={setIsSubmitting}
                 />
               ))}
