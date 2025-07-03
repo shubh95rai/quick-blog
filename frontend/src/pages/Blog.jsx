@@ -83,7 +83,7 @@ export default function Blog() {
 
       <Navbar />
 
-      <div className="text-center mt-20 text-gray-600">
+      <div className="text-center mt-20 text-gray-600 mx-5">
         <p className="text-primary py-4 font-medium">
           Published on {moment(data.createdAt).format("MMMM Do, YYYY")}
         </p>

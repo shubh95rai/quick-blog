@@ -7,7 +7,7 @@ export default function Navbar() {
   const { token, navigate } = useAppContext();
 
   return (
-    <div className="flex justify-between items-center py-5 mx-8 sm:mx-20 xl:mx-32">
+    <div className="flex justify-between items-center py-5 mx-6 sm:mx-20 xl:mx-32">
       <img
         src={assets.logo}
         alt="logo"
@@ -25,7 +25,7 @@ export default function Navbar() {
         {token ? "Dashboard" : "Admin Login"}
         {/* <img src={assets.arrow} alt="arrow" className="w-3 mt-0.5" /> */}
 
-        <ArrowRight className="w-4 pt-[1px]" />
+        <ArrowRight className="max-sm:hidden w-4 pt-[1px]" />
       </button>
     </div>
   );

@@ -22,11 +22,11 @@ export default function BlogList() {
 
   return (
     <div>
-      <div className="flex justify-center gap-4 sm:gap-8 my-10 relative">
+      <div className="flex justify-center gap-4 sm:gap-8 my-10 relative flex-wrap px-4">
         {blogCategories.map((item, index) => (
           <div key={index} className="relative">
             <button
-              className={`cursor-pointer text-gray-500 px-4 ${
+              className={`cursor-pointer text-gray-500 px-4 text-sm sm:text-base ${
                 menu === item && "text-white"
               }`}
               onClick={() => setMenu(item)}

@@ -67,10 +67,14 @@ export default function CommentTableItem({
         <b className="font-medium text-gray-600">Comment</b> : {comment.content}
       </td>
       <td className="px-6 py-4 max-sm:hidden">{BlogDate}</td>
-      <td className="px-6 py-4">
-        <div className="inline-flex items-center gap-4">
+      <td className="px- py-4 text-center  sm:pr-6">
+        <div className="inline-flex flex-col sm:flex-row items-center gap-4">
           {!comment.isApproved ? (
-            <button onClick={approveComment} disabled={isSubmitting}>
+            <button
+              onClick={approveComment}
+              disabled={isSubmitting}
+              className="shrink-0"
+            >
               <img
                 src={assets.tick_icon}
                 className="w-5 hover:scale-110 transition-all cursor-pointer"

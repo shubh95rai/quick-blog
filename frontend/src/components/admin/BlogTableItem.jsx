@@ -71,7 +71,7 @@ export default function BlogTableItem({
           {blog.isPublished ? "Published" : "Unpublished"}
         </p>
       </td>
-      <td className="px-2 py-4 text-xs flex gap-3">
+      <td className="px-2 py-4 text-xs flex gap-3 flex-col sm:flex-row items-center">
         <button
           className="border px-2 py-0.5 mt-1 rounded cursor-pointer"
           onClick={togglePublish}
@@ -83,7 +83,7 @@ export default function BlogTableItem({
         <button
           onClick={deleteBlog}
           disabled={isSubmitting}
-          className="shrink-0 pr-4"
+          className="shrink-0 sm:pr-4"
         >
           <img
             src={assets.cross_icon}

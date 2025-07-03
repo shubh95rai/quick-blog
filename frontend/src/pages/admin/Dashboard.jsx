@@ -40,7 +40,7 @@ export default function Dashboard() {
   }, []);
 
   return !loading ? (
-    <div className="flex-1 p-4 md:p-10 bg-blue-50/50">
+    <div className="flex-1 p-4 md:p-10 bg-blue-50/50 overflow-auto">
       {/* Dashboard Header */}
       <div className="flex flex-wrap gap-4">
         <div className="flex items-center gap-4 bg-white p-4 min-w-58 rounded shadow cursor-pointer hover:scale-105 transition-all">

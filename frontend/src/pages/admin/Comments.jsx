@@ -41,7 +41,7 @@ export default function Comments() {
             <div className="size-4 animate-spin rounded-full border-2 border-t-transparent border-gray-700"></div>
           )}
         </div>
-        <div className="flex gap-4">
+        <div className="flex gap-1 flex-col sm:flex-row">
           <button
             className={`shadow-custom-sm border rounded-full px-4 py-1 cursor-pointer text-xs ${
               filter === "Approved" ? "text-primary" : "text-gray-700"
